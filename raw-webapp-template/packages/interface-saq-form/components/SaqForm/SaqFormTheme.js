@@ -9,71 +9,71 @@
 export const SaqFormTheme = {
   // Border Radius - Standardized values
   borderRadius: {
-    sm: 'rounded',        // 0.25rem - small elements (badges, tags)
-    md: 'rounded-lg',    // 0.5rem - default for cards, buttons, inputs
-    lg: 'rounded-xl',    // 0.75rem - large cards, modals
-    xl: 'rounded-2xl',   // 1rem - extra large cards
+    sm: 'rounded-md',        // 0.375rem - small elements (badges, tags)
+    md: 'rounded-xl',    // 0.75rem - default for cards, buttons, inputs
+    lg: 'rounded-2xl',    // 1rem - large cards, modals
+    xl: 'rounded-3xl',   // 1.5rem - extra large cards
     full: 'rounded-full' // circles, pills
   },
 
   // Colors - Standardized palette
   colors: {
-    // Primary (Cyan) - Main actions, primary buttons, interactive elements
+    // Primary (Violet Blue) - Main actions, primary buttons, interactive elements
     primary: {
-      50: 'bg-cyan-50',
-      100: 'bg-cyan-100',
-      200: 'bg-cyan-200',
-      300: 'bg-cyan-300',
-      400: 'bg-cyan-400',
-      500: 'bg-cyan-500',  // Main primary color
-      600: 'bg-cyan-600',   // Hover states
-      700: 'bg-cyan-700',
-      800: 'bg-cyan-800',
-      900: 'bg-cyan-900',
+      50: 'bg-violet-50',
+      100: 'bg-violet-100',
+      200: 'bg-violet-200',
+      300: 'bg-violet-300',
+      400: 'bg-violet-400',
+      500: 'bg-violet-500',  // Main primary color
+      600: 'bg-violet-600',   // Hover states
+      700: 'bg-violet-700',
+      800: 'bg-violet-800',
+      900: 'bg-violet-900',
       text: {
-        50: 'text-cyan-50',
-        100: 'text-cyan-100',
-        500: 'text-cyan-500',
-        600: 'text-cyan-600',
-        700: 'text-cyan-700',
-        800: 'text-cyan-800',
-        900: 'text-cyan-900',
+        50: 'text-violet-50',
+        100: 'text-violet-100',
+        500: 'text-violet-500',
+        600: 'text-violet-600',
+        700: 'text-violet-700',
+        800: 'text-violet-800',
+        900: 'text-violet-900',
       },
       border: {
-        200: 'border-cyan-200',
-        300: 'border-cyan-300',
-        400: 'border-cyan-400',
-        500: 'border-cyan-500',
-        600: 'border-cyan-600',
+        200: 'border-violet-200',
+        300: 'border-violet-300',
+        400: 'border-violet-400',
+        500: 'border-violet-500',
+        600: 'border-violet-600',
       }
     },
 
-    // Success (Emerald) - Success states, completed items, positive actions
+    // Success (Green) - Success states, completed items, positive actions
     success: {
-      50: 'bg-emerald-50',
-      100: 'bg-emerald-100',
-      200: 'bg-emerald-200',
-      300: 'bg-emerald-300',
-      400: 'bg-emerald-400',
-      500: 'bg-emerald-500',  // Main success color
-      600: 'bg-emerald-600',  // Hover states
-      700: 'bg-emerald-700',
-      800: 'bg-emerald-800',
-      900: 'bg-emerald-900',
+      50: 'bg-green-50',
+      100: 'bg-green-100',
+      200: 'bg-green-200',
+      300: 'bg-green-300',
+      400: 'bg-green-400',
+      500: 'bg-green-500',  // Main success color
+      600: 'bg-green-600',  // Hover states
+      700: 'bg-green-700',
+      800: 'bg-green-800',
+      900: 'bg-green-900',
       text: {
-        50: 'text-emerald-50',
-        100: 'text-emerald-100',
-        500: 'text-emerald-500',
-        600: 'text-emerald-600',
-        700: 'text-emerald-700',
-        800: 'text-emerald-800',
-        900: 'text-emerald-900',
+        50: 'text-green-50',
+        100: 'text-green-100',
+        500: 'text-green-500',
+        600: 'text-green-600',
+        700: 'text-green-700',
+        800: 'text-green-800',
+        900: 'text-green-900',
       },
       border: {
-        200: 'border-emerald-200',
-        300: 'border-emerald-300',
-        400: 'border-emerald-400',
-        500: 'border-emerald-500',
+        200: 'border-green-200',
+        300: 'border-green-300',
+        400: 'border-green-400',
+        500: 'border-green-500',
       }
     },
 
@@ -212,10 +212,10 @@ export const SaqFormTheme = {
 
   // Shadows
   shadows: {
-    sm: 'shadow-sm',
-    md: 'shadow-md',
-    lg: 'shadow-lg',
-    xl: 'shadow-xl',
+    sm: 'shadow',
+    md: 'shadow-lg',
+    lg: 'shadow-xl',
+    xl: 'shadow-2xl',
     '2xl': 'shadow-2xl',
   }
 }
@@ -242,9 +242,9 @@ export const getButtonClasses = (variant = 'primary', size = 'md', disabled = fa
   }
 
   const sizes = {
-    sm: 'px-3 py-1.5',
-    md: 'px-4 py-2',
-    lg: 'px-6 py-3',
+    sm: 'px-3 py-2',
+    md: 'px-5 py-2.5',
+    lg: 'px-7 py-3.5',
   }
 
   return `${base} ${variants[variant] || variants.primary} ${sizes[size] || sizes.md}`

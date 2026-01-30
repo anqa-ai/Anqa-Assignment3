@@ -23,7 +23,7 @@ export const Input = ({
       type={type}
       value={value}
       onChange={onChange}
-      placeholder={placeholder || 'Enter your response...'}
+      placeholder={placeholder || 'Please provide your response here...'}
       disabled={disabled}
       className={`${classes} ${className}`}
       {...props}

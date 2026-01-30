@@ -10,9 +10,9 @@ export const InfoBox = ({ type = 'info', title, children, className = '' }) => {
   const alertClasses = getAlertClasses(type)
   
   return (
-    <div className={`${SaqFormTheme.borderRadius.xl} border p-5 ${SaqFormTheme.shadows.sm} ${alertClasses.bg} ${alertClasses.border} ${className}`}>
-      {title && <h3 className={`${SaqFormTheme.typography.fontSize.sm} ${SaqFormTheme.typography.fontWeight.semibold} ${alertClasses.text} mb-2`}>{title}</h3>}
-      <div className={`${SaqFormTheme.typography.fontSize.sm} ${alertClasses.text}`}>{children}</div>
+    <div className={`${SaqFormTheme.borderRadius.xl} border-2 p-6 ${SaqFormTheme.shadows.md} ${alertClasses.bg} ${alertClasses.border} ${className}`}>
+      {title && <h3 className={`${SaqFormTheme.typography.fontSize.base} ${SaqFormTheme.typography.fontWeight.bold} ${alertClasses.text} mb-3`}>{title}</h3>}
+      <div className={`${SaqFormTheme.typography.fontSize.sm} ${SaqFormTheme.typography.lineHeight.relaxed} ${alertClasses.text}`}>{children}</div>
     </div>
   )
 }

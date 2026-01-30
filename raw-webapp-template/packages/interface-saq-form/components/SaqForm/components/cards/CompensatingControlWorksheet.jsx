@@ -53,16 +53,16 @@ export const CompensatingControlWorksheet = ({
     : 0
 
   return (
-    <div className="mt-3 rounded-lg border-2 border-purple-300 bg-purple-50 p-4">
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <svg className="h-5 w-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div className="mt-4 rounded-xl border-2 border-purple-400 bg-purple-50 p-5">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2.5">
+          <svg className="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
-          <h4 className="text-sm font-bold text-purple-900">Appendix B: Compensating Controls Worksheet</h4>
+          <h4 className="text-base font-bold text-purple-900">Appendix B: Compensating Controls Worksheet</h4>
         </div>
         <div className="flex items-center gap-2">
-          <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
+          <span className={`text-sm font-bold px-3 py-1.5 rounded-full ${
             completionPercentage === 100 
               ? 'bg-emerald-100 text-emerald-700'
               : completionPercentage > 0
@@ -74,20 +74,20 @@ export const CompensatingControlWorksheet = ({
         </div>
       </div>
 
-      <p className="text-xs text-purple-800 mb-4">
-        Complete all fields below to document the compensating control for this requirement. All fields are required.
+      <p className="text-sm text-purple-800 mb-5 leading-relaxed">
+        Complete all required fields below to properly document the compensating control for this requirement. All fields must be filled out.
       </p>
 
       <div className="space-y-4">
         {sortedAppendixBQuestions.length === 0 ? (
-          <div className="rounded-lg border border-amber-300 bg-amber-50 p-4">
-            <div className="flex items-start gap-2">
-              <svg className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="rounded-xl border-2 border-amber-400 bg-amber-50 p-5">
+            <div className="flex items-start gap-3">
+              <svg className="h-6 w-6 text-amber-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
               <div className="flex-1">
-                <p className="text-sm font-semibold text-amber-900 mb-1">Appendix B Questions Not Found</p>
-                <p className="text-sm text-amber-800">
+                <p className="text-base font-semibold text-amber-900 mb-1.5">Appendix B Questions Not Found</p>
+                <p className="text-sm text-amber-800 leading-relaxed">
                   The Appendix B questions could not be loaded from the template. Please ensure the template includes Appendix B questions.
                 </p>
               </div>

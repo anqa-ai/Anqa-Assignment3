@@ -45,16 +45,16 @@ export const FollowUpQuestion = ({
   const style = variantStyles[variant] || variantStyles.primary
 
   return (
-    <div className={`mt-4 p-4 ${SaqFormTheme.borderRadius.md} ${style.bg} border ${style.border}`}>
-      <p className={`${SaqFormTheme.typography.fontSize.sm} ${SaqFormTheme.typography.fontWeight.medium} ${style.text} mb-2`}>{title}</p>
-      <p className={`${SaqFormTheme.typography.fontSize.sm} ${style.textLight} mb-3`}>
+    <div className={`mt-5 p-5 ${SaqFormTheme.borderRadius.lg} ${style.bg} border-2 ${style.border} ${SaqFormTheme.shadows.sm}`}>
+      <p className={`${SaqFormTheme.typography.fontSize.base} ${SaqFormTheme.typography.fontWeight.semibold} ${style.text} mb-2.5`}>{title}</p>
+      <p className={`${SaqFormTheme.typography.fontSize.sm} ${SaqFormTheme.typography.lineHeight.relaxed} ${style.textLight} mb-4`}>
         {question}
       </p>
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-4">
         <button
           type="button"
           onClick={() => onToggle(true)}
-          className={`${SaqFormTheme.borderRadius.md} px-4 py-2 ${SaqFormTheme.typography.fontSize.sm} ${SaqFormTheme.typography.fontWeight.semibold} transition-colors ${
+          className={`${SaqFormTheme.borderRadius.lg} px-5 py-2.5 ${SaqFormTheme.typography.fontSize.base} ${SaqFormTheme.typography.fontWeight.semibold} transition-colors ${
             value
               ? `${style.button} text-white ${SaqFormTheme.shadows.sm} hover:opacity-90`
               : `border ${style.border} ${style.textLight} hover:opacity-80`
@@ -65,7 +65,7 @@ export const FollowUpQuestion = ({
         <button
           type="button"
           onClick={() => onToggle(false)}
-          className={`${SaqFormTheme.borderRadius.md} px-4 py-2 ${SaqFormTheme.typography.fontSize.sm} ${SaqFormTheme.typography.fontWeight.semibold} transition-colors ${
+          className={`${SaqFormTheme.borderRadius.lg} px-5 py-2.5 ${SaqFormTheme.typography.fontSize.base} ${SaqFormTheme.typography.fontWeight.semibold} transition-colors ${
             !value
               ? `${style.button} text-white ${SaqFormTheme.shadows.sm} hover:opacity-90`
               : `border ${style.border} ${style.textLight} hover:opacity-80`
@@ -75,13 +75,13 @@ export const FollowUpQuestion = ({
         </button>
       </div>
       {yesResultMessage && value && (
-        <div className={`mt-2 ${SaqFormTheme.borderRadius.md} ${SaqFormTheme.colors.success[50]} border ${SaqFormTheme.colors.success.border[200]} p-2`}>
-          <p className={`${SaqFormTheme.typography.fontSize.xs} ${SaqFormTheme.typography.fontWeight.semibold} ${SaqFormTheme.colors.success.text[800]}`}>{yesResultMessage}</p>
+        <div className={`mt-3 ${SaqFormTheme.borderRadius.lg} ${SaqFormTheme.colors.success[50]} border-2 ${SaqFormTheme.colors.success.border[300]} p-3`}>
+          <p className={`${SaqFormTheme.typography.fontSize.sm} ${SaqFormTheme.typography.fontWeight.semibold} ${SaqFormTheme.colors.success.text[800]}`}>{yesResultMessage}</p>
         </div>
       )}
       {noResultMessage && !value && (
-        <div className={`mt-2 ${SaqFormTheme.borderRadius.md} ${SaqFormTheme.colors.neutral[100]} border ${SaqFormTheme.colors.neutral.border[300]} p-2`}>
-          <p className={`${SaqFormTheme.typography.fontSize.xs} ${SaqFormTheme.typography.fontWeight.semibold} ${SaqFormTheme.colors.neutral.text[700]}`}>{noResultMessage}</p>
+        <div className={`mt-3 ${SaqFormTheme.borderRadius.lg} ${SaqFormTheme.colors.neutral[100]} border-2 ${SaqFormTheme.colors.neutral.border[300]} p-3`}>
+          <p className={`${SaqFormTheme.typography.fontSize.sm} ${SaqFormTheme.typography.fontWeight.semibold} ${SaqFormTheme.colors.neutral.text[700]}`}>{noResultMessage}</p>
         </div>
       )}
     </div>

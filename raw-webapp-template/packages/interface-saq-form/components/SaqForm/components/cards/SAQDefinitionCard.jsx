@@ -14,7 +14,7 @@ export const SAQDefinitionCard = ({
 }) => {
   return (
     <div
-      className={`${SaqFormTheme.borderRadius.xl} border p-5 ${SaqFormTheme.shadows.sm} transition-all ${
+      className={`${SaqFormTheme.borderRadius.xl} border-2 p-6 ${SaqFormTheme.shadows.md} transition-all ${
         isSelected
           ? isSuggested
             ? `${SaqFormTheme.colors.primary.border[400]} ${SaqFormTheme.colors.primary[50]}`
@@ -42,12 +42,12 @@ export const SAQDefinitionCard = ({
             </label>
             {isSuggested && (
               <span className={`${getBadgeClasses('primary')}`}>
-                ⭐ Suggested
+                ⭐ Recommended for You
               </span>
             )}
             {isSelected && !isSuggested && (
               <span className={`${getBadgeClasses('primary')}`}>
-                Custom Selection
+                Your Selection
               </span>
             )}
           </div>

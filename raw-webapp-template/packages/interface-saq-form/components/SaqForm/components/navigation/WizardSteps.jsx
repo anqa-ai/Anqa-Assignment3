@@ -22,20 +22,20 @@ export const WizardSteps = ({ steps = [], activeSection, onStepClick = null }) =
   }
 
   return (
-    <div className={`grid gap-3 sm:grid-cols-2 ${getGridCols()}`}>
+    <div className={`grid gap-4 sm:grid-cols-2 ${getGridCols()}`}>
       {steps.map((step) => {
         const isComplete = Boolean(step.complete)
         
         // Use theme colors
         const cardClasses = isComplete
-          ? `${SaqFormTheme.colors.success.border[400]} ${SaqFormTheme.colors.success[50]} ${SaqFormTheme.colors.success.text[700]}`
-          : `${SaqFormTheme.colors.neutral.border[200]} bg-white ${SaqFormTheme.colors.neutral.text[500]}`
+          ? `${SaqFormTheme.colors.success.border[500]} ${SaqFormTheme.colors.success[100]} ${SaqFormTheme.colors.success.text[800]}`
+          : `${SaqFormTheme.colors.neutral.border[300]} bg-white ${SaqFormTheme.colors.neutral.text[600]}`
         
         return (
           <div 
             key={step.key} 
             onClick={() => handleStepClick(step)}
-            className={`${SaqFormTheme.borderRadius.md} border p-3 ${SaqFormTheme.shadows.sm} transition-all ${
+            className={`${SaqFormTheme.borderRadius.lg} border-2 p-4 ${SaqFormTheme.shadows.md} transition-all ${
               cardClasses
             } ${
               onStepClick ? 'cursor-pointer hover:shadow-md hover:scale-[1.02]' : ''

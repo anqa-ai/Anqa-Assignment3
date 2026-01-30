@@ -17,11 +17,11 @@ export const PaymentChannelCard = ({
   resultMessage 
 }) => {
   return (
-    <div className={`${SaqFormTheme.borderRadius.xl} border ${SaqFormTheme.colors.neutral.border[200]} bg-white p-5 ${SaqFormTheme.shadows.sm}`}>
-      <div className="flex flex-col gap-3">
+    <div className={`${SaqFormTheme.borderRadius.xl} border-2 ${SaqFormTheme.colors.neutral.border[300]} bg-white p-6 ${SaqFormTheme.shadows.md}`}>
+      <div className="flex flex-col gap-4">
         <div>
-          <p className={`${SaqFormTheme.typography.fontSize.sm} ${SaqFormTheme.typography.fontWeight.medium} ${SaqFormTheme.colors.neutral.text[900]}`}>{title}</p>
-          {subtitle && <p className={`mt-1 ${SaqFormTheme.typography.fontSize.xs} ${SaqFormTheme.colors.neutral.text[600]}`} style={{ fontStyle: 'italic' }}>{subtitle}</p>}
+          <p className={`${SaqFormTheme.typography.fontSize.base} ${SaqFormTheme.typography.fontWeight.semibold} ${SaqFormTheme.colors.neutral.text[900]}`}>{title}</p>
+          {subtitle && <p className={`mt-1.5 ${SaqFormTheme.typography.fontSize.sm} ${SaqFormTheme.colors.neutral.text[600]}`} style={{ fontStyle: 'italic' }}>{subtitle}</p>}
           {description && (
             <ul className={`mt-2 ${SaqFormTheme.typography.fontSize.xs} ${SaqFormTheme.colors.neutral.text[600]} list-disc list-inside space-y-1`}>
               {Array.isArray(description) ? description.map((item, idx) => (
