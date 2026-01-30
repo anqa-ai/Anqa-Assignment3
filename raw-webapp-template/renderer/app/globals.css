@@ -1,0 +1,67 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+@source "./**/*.{js,jsx,ts,tsx,mdx}";
+@source "../lib/**/*.{js,jsx,ts,tsx}";
+@source "../../packages/interface-*/**/*.{js,jsx,ts,tsx,mdx}";
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: #333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  text-align: center;
+}
+
+.error-page h1 {
+  color: #d63031;
+  margin-bottom: 16px;
+}
+
+.error-page p {
+  margin-bottom: 20px;
+  max-width: 600px;
+}
+
+.retry-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.retry-button:hover {
+  background: #0056b3;
+}
+
+.debug-info {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 16px;
+  margin-top: 20px;
+  text-align: left;
+  max-width: 800px;
+  overflow: auto;
+}
+
+.debug-info pre {
+  margin: 0;
+  font-size: 14px;
+}

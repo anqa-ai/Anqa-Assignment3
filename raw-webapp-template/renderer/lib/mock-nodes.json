@@ -1,0 +1,44 @@
+{
+  "demo-saq-form-456": {
+    "interface": "@webapp/interface-saq-form",
+    "version": "1.0.0",
+    "config": {
+      "title": "PCI SAQ Advisor",
+      "subtitle": "Interactive questionnaire to identify the correct PCI Self-Assessment Questionnaire",
+      "showProgress": true,
+      "allowExport": true
+    },
+    "branding": {
+      "companyName": "Compliance Solutions Inc",
+      "primaryColor": "#dc2626",
+      "fontFamily": "Inter, system-ui, sans-serif",
+      "logo": "https://via.placeholder.com/150x50/dc2626/white?text=CompSol"
+    },
+    "policy": {
+      "roles": [
+        "compliance.read",
+        "pci.assess"
+      ]
+    }
+  },
+  "demo-pdf-signer-321": {
+    "interface": "@webapp/interface-pdf-signer",
+    "version": "1.0.0",
+    "config": {
+      "questionnaireAnswerUuid": "516a6ad1-27e0-465e-adb5-a4b94be4f7c1",
+      "saqName": "SAQ A"
+    },
+    "branding": {
+      "companyName": "Smart Enterprises",
+      "primaryColor": "#28a745",
+      "fontFamily": "Inter, system-ui, sans-serif",
+      "logo": "https://via.placeholder.com/150x50/28a745/white?text=SmartEnterprises"
+    },
+    "policy": {
+      "roles": [
+        "user.read",
+        "interface.view"
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+# Prevent merge conflicts for deployment-specific files
+.github/workflows/main.yml merge=ours
+buildspec.yml merge=ours
+Dockerfile merge=ours
+docker-compose.yml merge=ours
+renderer/.env.* merge=ours

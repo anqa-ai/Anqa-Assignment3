@@ -1,0 +1,23 @@
+id;requirement;requirement_title;question_text;expected_testing;source_page;applicability_tags
+2.1;2;Default Passwords and Security Parameters;Are default passwords always changed before installing a system on the network?;Interview personnel - Review configuration standards - Examine configuration settings;5;
+2.2;2;Default Passwords and Security Parameters;Are all unnecessary default accounts removed or disabled before installing a system on the network?;Interview personnel - Review configuration standards - Examine accounts;5;
+2.3;2;Default Passwords and Security Parameters;Is non-console administrative access encrypted using strong cryptography?;Interview personnel - Examine system configurations;5;
+4.1;4;Transmission of Cardholder Data;Is strong cryptography used to safeguard cardholder data during transmission over open public networks?;Interview personnel - Review encryption protocols;13;
+8.1.1;8;User Identification and Authentication;Are all users assigned a unique ID before allowing them to access system components?;Interview personnel - Examine user ID lists;25;
+8.2.1;8;User Identification and Authentication;Is user identity verified before modifying any authentication credential?;Interview personnel - Review authentication procedures;26;
+8.2.3;8;User Identification and Authentication;Do passwords/passphrases meet the following minimum strength requirements: at least seven characters long AND contain both numeric and alphabetic characters?;Interview personnel - Review password configurations;26;
+8.2.4;8;User Identification and Authentication;Are user passwords/passphrases changed at least every 90 days?;Interview personnel - Review password settings;26;
+8.2.5;8;User Identification and Authentication;Is an individual prevented from submitting a new password/passphrase that is the same as any of the last four passwords/passphrases used?;Interview personnel - Examine password configurations;26;
+8.3.1;8;User Identification and Authentication;Is multi-factor authentication implemented for all remote network access originating from outside the entity's network that could access or impact the cardholder data environment?;Interview personnel - Review authentication configurations;27;
+8.5.1;8;User Identification and Authentication;Are shared user IDs for system administration and other critical functions prohibited?;Interview personnel - Review user ID lists;28;
+9.1;9;Physical Access to Cardholder Data;Are appropriate facility entry controls used to limit and monitor physical access to systems in the cardholder data environment?;Observe facility entry controls - Interview personnel;29;
+9.5;9;Physical Access to Cardholder Data;Are all media physically secured (including computers - removable electronic media - paper receipts - paper reports - and faxes)?;Observe physical security controls - Interview personnel;31;
+9.6;9;Physical Access to Cardholder Data;Is strict control maintained over the internal or external distribution of any kind of media?;Interview personnel - Review distribution procedures;31;
+9.7;9;Physical Access to Cardholder Data;Is strict control maintained over the storage and accessibility of media?;Observe storage controls - Interview personnel;32;
+9.8;9;Physical Access to Cardholder Data;Is all media destroyed when it is no longer needed for business or legal reasons?;Interview personnel - Review destruction procedures;32;
+9.9.1;9;Physical Access to Cardholder Data;Are card-present POI devices protected from tampering and substitution?;Observe POI device handling - Interview personnel;33;
+9.9.2;9;Physical Access to Cardholder Data;Is training provided for personnel to be aware of attempted tampering or replacement of devices?;Interview personnel - Review training materials;33;
+9.9.3;9;Physical Access to Cardholder Data;Are deployed card-present POI devices periodically inspected to detect tampering or substitution?;Interview personnel - Review inspection logs;33;
+12.3;12;Information Security Policy;Is a usage policy for critical technologies developed and implemented? Does it explicitly require user acknowledgment?;Review usage policies - Interview personnel;62;
+12.5.3;12;Information Security Policy;Are all anomalies and exceptions noted during the review of security logs followed up and resolved?;Interview personnel - Examine security logs;63;
+12.8.2;12;Information Security Policy;Is the service provider required to maintain documented policies and procedures per PCI DSS Requirements 12.1 through 12.5?;Review service provider agreements - Examine documentation;64;

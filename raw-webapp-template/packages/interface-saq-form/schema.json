@@ -1,0 +1,38 @@
+{
+  "$id": "https://schemas.webapp.com/interface-saq-form.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "Interface SAQ Form Configuration",
+  "description": "Configuration schema for PCI SAQ Advisor form interface",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Display title for the form",
+      "default": "PCI SAQ Advisor"
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Subtitle or description",
+      "default": "Interactive questionnaire to identify the correct PCI Self-Assessment Questionnaire"
+    },
+    "showProgress": {
+      "type": "boolean",
+      "description": "Whether to show progress indicator",
+      "default": true
+    },
+    "allowExport": {
+      "type": "boolean",
+      "description": "Whether to allow exporting results",
+      "default": true
+    },
+    "csvUrl": {
+      "type": "string",
+      "description": "URL to fetch SAQ D questions CSV (if applicable)",
+      "default": null
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "additionalProperties": false
+}

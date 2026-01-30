@@ -1,0 +1,40 @@
+{
+  "name": "webapp-interfaces",
+  "version": "1.0.0",
+  "description": "Composable system for serving client-specific web interfaces as versioned interface packages",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "renderer",
+    "examples/*"
+  ],
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint packages --ext .js,.jsx",
+    "lint:fix": "eslint packages --ext .js,.jsx --fix",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "build": "npm run build --workspaces",
+    "gen:interface": "node scripts/generate-interface.js",
+    "remove:interface": "node scripts/remove-interface.js"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^14.3.1",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
+  }
+}

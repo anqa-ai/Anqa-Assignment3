@@ -1,0 +1,22 @@
+{
+  "name": "@webapp/interface-saq-form",
+  "version": "1.0.0",
+  "description": "Interface: PCI SAQ Advisor Form",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "dependencies": {
+    "@webapp/interface-sdk": "file:../interface-sdk"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "@testing-library/react": "^14.3.1",
+    "@testing-library/jest-dom": "^6.4.5"
+  }
+}

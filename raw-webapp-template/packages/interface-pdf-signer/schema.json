@@ -1,0 +1,21 @@
+{
+  "$id": "https://schemas.webapp.com/interface-pdf-signer.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "Interface pdf-signer Configuration",
+  "description": "Configuration schema for pdf-signer interface",
+  "properties": {
+    "questionnaireAnswerUuid": {
+      "type": "string",
+      "description": "Questionnaire answer UUID (contains document UUID in metadata)",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "saqName": {
+      "type": "string",
+      "description": "Display name for the SAQ",
+      "default": "SAQ"
+    }
+  },
+  "required": ["questionnaireAnswerUuid"],
+  "additionalProperties": false
+}

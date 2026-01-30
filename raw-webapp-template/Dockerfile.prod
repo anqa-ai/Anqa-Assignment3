@@ -1,0 +1,53 @@
+# Stage 1: Build
+FROM public.ecr.aws/docker/library/node:18-alpine AS builder
+
+WORKDIR /app
+
+# Copy all package.json files for npm workspaces
+COPY package*.json ./
+COPY renderer/package*.json ./renderer/
+COPY packages/interface-sdk/package.json ./packages/interface-sdk/
+COPY packages/*/package.json ./packages/
+
+# Install all dependencies at root (npm workspaces handles subdirectories)
+RUN npm install --production=false
+
+# Copy Tailwind and PostCSS config files
+COPY renderer/tailwind.config.js ./renderer/
+COPY renderer/postcss.config.js ./renderer/
+
+# Copy application files
+COPY . .
+
+# Build Next.js application
+WORKDIR /app/renderer
+RUN npm run build
+
+# Stage 2: Production
+FROM public.ecr.aws/docker/library/node:25-alpine
+
+WORKDIR /app
+
+# Copy the complete standalone output
+COPY --from=builder /app/renderer/.next/standalone ./
+# Copy static assets (must be in .next/static)
+COPY --from=builder /app/renderer/.next/static ./.next/static
+# Copy public directory (must be at root level for Next.js standalone to serve static files)
+COPY --from=builder /app/renderer/public ./public
+# Copy packages directory (needed for dynamic interface loading)
+COPY --from=builder /app/packages ./packages
+# Copy lib directory with mock-nodes.json (standalone output already includes lib at root)
+
+# Install production dependencies (standalone needs this)
+RUN npm install --omit=dev
+
+# Install curl for health checks
+RUN apk add --no-cache curl
+
+# Expose production port
+EXPOSE 3000
+
+# Start production server
+ENV NODE_ENV=production
+ENV HOSTNAME=0.0.0.0
+CMD ["node", "server.js"]

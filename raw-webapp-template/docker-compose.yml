@@ -1,0 +1,29 @@
+# Docker Compose for template renderer
+# Simplified single-service approach with Next.js standalone
+
+services:
+  # Template Renderer Service
+  template-renderer:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "${HOST_PORT:-3005}:${CONTAINER_PORT:-3000}"
+    container_name: template-renderer-local
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - CLIENT_UUID=${CLIENT_UUID:-}
+      - API_KEY=${API_KEY:-}
+      - CLIENT_API_URL=${CLIENT_API_URL:-https://dev.api.anqa.ai}
+      - PORT=${CONTAINER_PORT:-3000}
+      - HOSTNAME=0.0.0.0
+      - RENDERER_INTERNAL_URL=http://127.0.0.1:3000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
