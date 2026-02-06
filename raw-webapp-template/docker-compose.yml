@@ -15,8 +15,11 @@ services:
     environment:
       - NODE_ENV=production
       - CLIENT_UUID=${CLIENT_UUID:-}
-      - API_KEY=${API_KEY:-}
-      - CLIENT_API_URL=${CLIENT_API_URL:-https://dev.api.anqa.ai}
+      - CLIENT_API_KEY=${CLIENT_API_KEY:-}
+      - API_URL=${API_URL:-https://dev.api.anqa.ai}
+      - COGNITO_EXTERNAL_CLIENT_ID=${COGNITO_EXTERNAL_CLIENT_ID:-}
+      - COGNITO_EXTERNAL_USER_POOL_ID=${COGNITO_EXTERNAL_USER_POOL_ID:-}
+      - AWS_REGION=${AWS_REGION:-eu-west-2}
       - PORT=${CONTAINER_PORT:-3000}
       - HOSTNAME=0.0.0.0
       - RENDERER_INTERNAL_URL=http://127.0.0.1:3000

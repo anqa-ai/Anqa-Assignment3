@@ -31,7 +31,7 @@ async function handleApiProxy(request, { params }, method) {
     
     // Check for local development environment variables (same as proxy-server.js)
     const localClientUuid = process.env.CLIENT_UUID;
-    const localApiKey = process.env.CLIENT_API_KEY || process.env.API_KEY;
+    const localApiKey = process.env.CLIENT_API_KEY;
     const isLocalTesting = localClientUuid && localApiKey;
     
     let clientUuid = null;

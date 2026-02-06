@@ -69,7 +69,7 @@ export async function POST(request) {
       
       // Get instance to check sent_to (use local testing headers if available)
       const localClientUuid = process.env.CLIENT_UUID;
-      const localApiKey = process.env.API_KEY;
+      const localApiKey = process.env.CLIENT_API_KEY;
       const isLocalTesting = localClientUuid && localApiKey;
       
       const headers = { 'Content-Type': 'application/json' };
