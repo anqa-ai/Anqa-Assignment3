@@ -13,10 +13,12 @@
 // ========== SECTION 1: Static Imports (add new imports here) ==========
 import * as InterfaceSaqForm from '@webapp/interface-saq-form';
 import * as InterfacePdfSigner from '@webapp/interface-pdf-signer';
+import * as InterfaceAuthentication from '@webapp/interface-authentication';
 // ========== SECTION 2: Registry Mapping (add new entries here) ==========
 export const interfaceRegistry = {
   '@webapp/interface-saq-form': InterfaceSaqForm,
   '@webapp/interface-pdf-signer': InterfacePdfSigner,
+  '@webapp/interface-authentication': InterfaceAuthentication,
 };
 
 // ========== Helper Functions (no changes needed below) ==========

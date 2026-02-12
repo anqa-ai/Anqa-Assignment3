@@ -1,0 +1,11 @@
+{
+  "$id": "https://schemas.webapp.com/interface-authentication.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "title": "Interface authentication Configuration",
+  "description": "Configuration schema for authentication interface",
+  "properties": {
+  },
+  "required": [],
+  "additionalProperties": false
+}

@@ -1,16 +1,18 @@
 # Anqa Assignment
 
 ## Overview
+
 This repository contains a stripped-down version of our web interfaces and API documentation for you to explore and work with.
 
 ## What's Included
+
 - **`raw-webapp-template/`** - A Next.js application with sample interfaces (PDF signer, SAQ form)
 - **`raw-webapp-template/.env.example`** provides the example for a .env with the required headers for interacting with the API backend (we will provide these for you)
-   - in the case that you wish to make API calls diretly (via Postman, curl etc...) you need to set the headers as `x-client-uuid` and `x-api-key` provided in the .env
+  - in the case that you wish to make API calls directly (via Postman, curl etc...) you need to set the headers as `x-client-uuid` and `x-api-key` provided in the .env
 - **`openapi.json`** - Complete API specification with all available endpoints
 
-
 ## API Documentation
+
 Review the `openapi.json` file for details on all available API endpoints and their schemas.
 
 ## Task 1: Interface Routing & Modularization
@@ -54,7 +56,6 @@ Your solution should demonstrate:
 - Think about how to orchestrate multiple interfaces without creating tight coupling
 - Demonstrate clean separation of concerns and reusability
 
-
 ## Task 2: Queryable API Layer
 
 ### Background
@@ -74,11 +75,13 @@ You are given the API specification in `openapi.json`. Your task is to build a l
 ### Requirements
 
 The service should:
+
 - Process natural language queries about the API (endpoints, schemas, parameters, usage)
 - Return factually accurate responses based on the OpenAPI specification
 - Be runnable entirely locally via Docker
 
 **Local Execution:**
+
 - The solution must run via Docker
 - A single command (`docker run` or `docker compose up`) should start the service
 - No manual setup steps after the container starts
@@ -121,3 +124,4 @@ you will find 2 commits of this repo, one with the tag SAQ_Layout_1 and another 
   - How a user would review and approve changes
   - What happens when changes are approved or rejected
 
+docker run -p 8080:8080 -e SWAGGER_JSON=/foo/openapi.json -v "C:\Users\TharneshanNandakumar\OneDrive - Rendesco\Documents\LLM\Anqa-Assignment3\openapi.json:/foo/openapi.json" swaggerapi/swagger-ui

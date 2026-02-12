@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.682.0",
+    "@webapp/interface-authentication": "file:../packages/interface-authentication",
     "@webapp/interface-pdf-signer": "file:../packages/interface-pdf-signer",
     "@webapp/interface-saq-form": "file:../packages/interface-saq-form",
     "@webapp/interface-sdk": "file:../packages/interface-sdk",
+    "amazon-cognito-identity-js": "^6.3.16",
     "axios": "^1.12.2",
     "jose": "^5.9.6",
     "jwt-decode": "^4.0.0",

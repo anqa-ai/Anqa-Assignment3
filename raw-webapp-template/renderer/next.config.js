@@ -8,7 +8,8 @@ const nextConfig = {
   transpilePackages: [
     '@webapp/interface-sdk', 
     '@webapp/interface-saq-form',
-    '@webapp/interface-pdf-signer'
+    '@webapp/interface-pdf-signer',
+    '@webapp/interface-authentication'
   ],
   // Add webpack configuration for SVGs from interface packages
   webpack(config) {
