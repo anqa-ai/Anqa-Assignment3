@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  llm:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    entrypoint: >
+      sh -c "
+        ollama serve &
+        sleep 5 &&
+        ollama pull mistral &&
+        wait
+      "
+  api:
+    restart: always
+    build: .
+    container_name: api-doc-assistant
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./openapi.json:/code/openapi.json
+      - ./app:/code/app # Mount the source code for development
+    environment:
+      - OPENAPI_PATH=/code/openapi.json
+      - LLM_HOST=http://llm:11434
+      - MODEL_NAME=mistral
+    depends_on:
+      - llm
+
+volumes:
+  ollama_data:
