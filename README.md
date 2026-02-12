@@ -1,5 +1,7 @@
 # Anqa Assignment
 
+## Note: Please see Summary.md for my summary of the day
+
 ## Overview
 
 This repository contains a stripped-down version of our web interfaces and API documentation for you to explore and work with.
