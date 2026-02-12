@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>SAQ-Form Visual Review</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: sans-serif; margin: 18px; }
+    .layout { display:flex; gap:16px; align-items:flex-start; }
+    .panel { border:1px solid #ddd; padding:10px; border-radius:6px; width:48%; }
+    canvas { width:100%; height:auto; border:1px solid #ccc; display:block; }
+    .controls { margin-top:10px; }
+    .big { font-size:1.1rem; font-weight:600; }
+    .heatkey { margin-top:8px; font-size:0.9rem; color:#666; }
+    textarea { width:100%; min-height:80px; }
+    .buttons { display:flex; gap:8px; margin-top:8px; }
+    button { padding:8px 12px; border-radius:6px; cursor:pointer; }
+    .approve { background:#1f8b4c; color:white; border:none; }
+    .reject { background:#c0392b; color:white; border:none; }
+    .metric { margin-top:8px; font-weight:600; }
+    .slider { width:100%; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <h2>SAQ-Form Visual Review</h2>
+  <div id="meta"></div>
+
+  <div class="layout">
+    <div class="panel">
+      <div class="big">Before</div>
+      <canvas id="canvasBefore"></canvas>
+    </div>
+
+    <div class="panel">
+      <div class="big">After</div>
+      <canvas id="canvasAfter"></canvas>
+    </div>
+  </div>
+
+  <div style="margin-top:12px;">
+    <div class="big">Overlay / Slider</div>
+    <div style="position:relative; width:100%; max-width:1200px;">
+      <canvas id="canvasOverlay" style="position:relative; display:block;"></canvas>
+      <input id="overlaySlider" class="slider" type="range" min="0" max="100" value="50" />
+    </div>
+    <div id="metric" class="metric"></div>
+  </div>
+
+  <div style="margin-top:12px;">
+    <div class="big">Diff Heatmap (red = changed pixels)</div>
+    <canvas id="canvasDiff"></canvas>
+    <div class="heatkey">Percent changed: <span id="percent">0%</span></div>
+  </div>
+
+  <div style="margin-top:12px;">
+    <label class="big">Reviewer notes</label>
+    <textarea id="notes" placeholder="Add comments (optional)"></textarea>
+    <div class="buttons">
+      <button class="approve" id="btnApprove">Approve</button>
+      <button class="reject" id="btnReject">Reject</button>
+    </div>
+    <div id="responseMsg" style="margin-top:8px;color:#333"></div>
+  </div>
+
+<script>
+(async function(){
+  // load current_review.json from server
+  const metaResp = await fetch('/artifacts/current_review.json');
+  const meta = await metaResp.json();
+  document.getElementById('meta').innerHTML = `<div>Comparing <b>${meta.tagA}</b> → <b>${meta.tagB}</b></div>`;
+
+  // choose one viewport / route pair to display (first screenshot pair)
+  // find a before/after file in /artifacts
+  const artifactDir = '/artifacts';
+  // naive: find first PNG pair by listing known names from prepare_artifacts format:
+  // <TAG>__<route>__<W>x<H>.png
+  const tagA = meta.tagA, tagB = meta.tagB;
+  const artifacts = await (await fetch('/artifacts/')).text().catch(()=>'');
+  // Instead of directory listing (not always available), assume same names as prepare script:
+  // root viewport 1366x768
+  const beforePath = `/artifacts/${tagA}__root__1366x768.png`;
+  const afterPath  = `/artifacts/${tagB}__root__1366x768.png`;
+
+  // helper: load image to HTMLImageElement
+  function loadImg(src){
+    return new Promise((res,rej)=>{
+      const img=new Image();
+      img.crossOrigin="anonymous";
+      img.onload=()=>res(img);
+      img.onerror=(e)=>rej(e);
+      img.src=src + "?_=" + Date.now(); // cache bust
+    });
+  }
+
+  let imgBefore, imgAfter;
+  try {
+    imgBefore = await loadImg(beforePath);
+    imgAfter  = await loadImg(afterPath);
+  } catch(e) {
+    document.body.innerHTML = "<h3>Error loading screenshots. Make sure prepare_artifacts.sh created screenshots at /artifacts.</h3><pre>"+e+"</pre>";
+    return;
+  }
+
+  // canonical width/height from before image
+  const W = imgBefore.naturalWidth, H = imgBefore.naturalHeight;
+  const canvBefore = document.getElementById('canvasBefore');
+  const canvAfter = document.getElementById('canvasAfter');
+  const canvOverlay = document.getElementById('canvasOverlay');
+  const canvDiff = document.getElementById('canvasDiff');
+
+  [canvBefore, canvAfter, canvOverlay, canvDiff].forEach(c=>{
+    c.width = W; c.height = H;
+  });
+
+  const ctxBefore = canvBefore.getContext('2d');
+  const ctxAfter = canvAfter.getContext('2d');
+  const ctxOverlay = canvOverlay.getContext('2d');
+  const ctxDiff = canvDiff.getContext('2d');
+
+  // draw images
+  ctxBefore.drawImage(imgBefore, 0, 0, W, H);
+  ctxAfter.drawImage(imgAfter, 0, 0, W, H);
+  // initial overlay: draw before then after with alpha
+  ctxOverlay.globalAlpha = 1.0;
+  ctxOverlay.drawImage(imgBefore,0,0,W,H);
+  ctxOverlay.globalAlpha = 0.5;
+  ctxOverlay.drawImage(imgAfter,0,0,W,H);
+
+  // compute pixel diff (pixel-by-pixel)
+  const dataA = ctxBefore.getImageData(0,0,W,H).data;
+  const dataB = ctxAfter.getImageData(0,0,W,H).data;
+  const diffImage = ctxDiff.createImageData(W,H);
+  let changed=0;
+  for(let i=0;i<dataA.length;i+=4){
+    const r1=dataA[i], g1=dataA[i+1], b1=dataA[i+2], a1=dataA[i+3];
+    const r2=dataB[i], g2=dataB[i+1], b2=dataB[i+2], a2=dataB[i+3];
+    // compute per-channel absolute difference
+    const dr = Math.abs(r1-r2);
+    const dg = Math.abs(g1-g2);
+    const db = Math.abs(b1-b2);
+    const diff = (dr + dg + db) / 3;
+    // threshold small differences (tune if necessary)
+    const THRESH = 8; // 0-255
+    if (diff > THRESH){
+      // mark red in diff image with alpha proportional to difference
+      diffImage.data[i] = 255;
+      diffImage.data[i+1] = 0;
+      diffImage.data[i+2] = 0;
+      diffImage.data[i+3] = 180; // semi-transparent red
+      changed++;
+    } else {
+      // transparent pixel
+      diffImage.data[i+0]=0;
+      diffImage.data[i+1]=0;
+      diffImage.data[i+2]=0;
+      diffImage.data[i+3]=0;
+    }
+  }
+  ctxDiff.putImageData(diffImage,0,0);
+  const totalPixels = W*H;
+  const percent = (changed/totalPixels*100).toFixed(2);
+  document.getElementById('percent').innerText = percent + '%';
+  document.getElementById('metric').innerText = `Pixels changed (approx): ${percent}%`;
+
+  // Overlay slider behaviour: show 'after' blended over 'before' based on slider
+  const slider = document.getElementById('overlaySlider');
+  function updateOverlay(){
+    const v = slider.value / 100;
+    ctxOverlay.clearRect(0,0,W,H);
+    ctxOverlay.globalAlpha = 1.0;
+    ctxOverlay.drawImage(imgBefore,0,0,W,H);
+    ctxOverlay.globalAlpha = v;
+    ctxOverlay.drawImage(imgAfter,0,0,W,H);
+    ctxOverlay.globalAlpha = 1.0;
+  }
+  slider.addEventListener('input', updateOverlay);
+  updateOverlay();
+
+  // Approve/Reject handlers
+  async function postDecision(decision){
+    const notes = document.getElementById('notes').value || '';
+    const payload = {
+      decision,
+      reviewer: (window.REVIEWER_NAME || "local-reviewer"),
+      tagA: tagA,
+      tagB: tagB,
+      notes: notes,
+      pct_changed: percent
+    };
+    try {
+      const resp = await fetch('/decision', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const body = await resp.text();
+      document.getElementById('responseMsg').innerText = body;
+    } catch(e){
+      document.getElementById('responseMsg').innerText = 'Error sending decision: ' + e;
+    }
+  }
+
+  document.getElementById('btnApprove').addEventListener('click', ()=>{
+    if (!confirm('Approve these changes and merge to main?')) return;
+    postDecision('approve');
+  });
+  document.getElementById('btnReject').addEventListener('click', ()=>{
+    if (!confirm('Reject these changes?')) return;
+    postDecision('reject');
+  });
+
+})();
+</script>
+</body>
+</html>
